@@ -18,7 +18,7 @@ def main():
             states = json.load(f)
         for alg in states:
             print(f"states[alg]: {states[alg]} - alg: {alg} - algSet: {algSet}")
-            gen = imagegenerator.ImageGen(states[alg][0], alg, algSet)
+            gen = imagegenerator.ImageGen(states[alg][0], alg.replace(" ", "_"), algSet)
             gen.make()
 
 if __name__ == "__main__":
