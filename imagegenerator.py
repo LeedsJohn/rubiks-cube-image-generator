@@ -9,11 +9,11 @@ from PIL import Image, ImageDraw
 
 OUTPUT_PATH = "./output/"
 CHAR_TO_COLOR = {"w": (255, 255, 255),
-                 "y": (255, 255, 0),
-                 "g": (30, 255, 30),
-                 "b": (0, 0, 255),
-                 "r": (255, 0, 0),
-                 "o": (255, 165, 0),
+                 "y": (255, 213, 0),
+                 "g": (0, 155, 72),
+                 "b": (0, 70, 173),
+                 "r": (183, 18, 52),
+                 "o": (255, 88, 0),
                  "x": (127, 127, 127)}
 
 IGNORED_COLORS = {"OLL": "gwrbo", "WVLS": "gwrbo", "WVLS_FL": "gwrbo"}
