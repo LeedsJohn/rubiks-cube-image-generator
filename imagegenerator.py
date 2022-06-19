@@ -50,7 +50,7 @@ class ImageGen:
                 squares.append((x, y, x+18, y+18))
         right = [(71, y, 79, y+18) for y in (11, 31, 51)]
         front = [(x, 71, x-18, 79) for x in (69, 49, 29)]
-        left = [(1, y, 9, y+18) for y in (11, 31, 51)]
+        left = [(1, y, 9, y+18) for y in (51, 31, 11)]
         back = [(x, 1, x+18, 9) for x in (11, 31, 51)]
         squares += right + front + left + back
         draw = ImageDraw.Draw(self.img)
@@ -80,9 +80,11 @@ class ImageGen:
         to one that this program can generate an image of
         """
         
-        self.cubestring = self.cubestring[:12] + self.cubestring[18:21] + self.cubestring[30:33] + self.cubestring[39:42]
+        self.cubestring = self.cubestring[:9] + self._reverse(self.cubestring[9:12]) + \
+        self._reverse(self.cubestring[18:21]) + self._reverse(self.cubestring[36:39]) + \
+        self._reverse(self.cubestring[45:48])
         newString = ""
-        translations = {"U": "w", "D": "y", "R": "r", "L": "o", "F": "g", "B": "b"}
+        translations = {"U": "y", "D": "w", "R": "r", "L": "o", "F": "b", "B": "g"}
         for i, char in enumerate(self.cubestring):
             c = translations[char]
             if self.algset in IGNORED_COLORS and c in IGNORED_COLORS[self.algset]:
@@ -95,3 +97,7 @@ class ImageGen:
             else:
                 newString += c
         self.cubestring = newString
+        print(self.cubestring)
+    
+    def _reverse(self, str):
+        return str[::-1]
