@@ -9,19 +9,25 @@ from PIL import Image, ImageDraw
 OUTPUT_PATH = "./output/"
 CHAR_TO_COLOR = {"w": (255, 255, 255),
                  "y": (255, 255, 0),
-                 "g": (0, 255, 0),
+                 "g": (30, 255, 30),
                  "b": (0, 0, 255),
                  "r": (255, 0, 0),
                  "o": (255, 165, 0),
                  "x": (127, 127, 127)}
 
+IGNORED_COLORS = {"OLL": "gwrbo", "WVLS": "gwrbo", "WVLS_FL": "gwrbo"}
+IGNORED_INDICES = {"CMLL": [1, 3, 4, 5, 7, 10, 13, 16, 19], "COLL": [10, 13, 16, 19]}
+KEEP_INDICES = {"WVLS": [5, 8, 10, 11, 12], "WVLS_FL": [5, 8, 10, 11, 12]}
+
 class ImageGen:
-    def __init__(self, cubestring, fName):
+    def __init__(self, cubestring, fName, algset):
         self.cubestring = cubestring
         self.fName = fName
+        self.algset = algset
         self.img = Image.new('RGB', (81, 81))
     
     def make(self):
+        self._convertState()
         self._drawSquares()
         self._drawLines()
         self.img.save(f"{OUTPUT_PATH}{self.fName}.png")
@@ -66,5 +72,25 @@ class ImageGen:
         for square in squares:
             draw.rectangle(square, fill=(0, 0, 0, 0))
 
-john = ImageGen("gwowwggwgwrrygwroowrb", "test")
-john.make()
+    def _convertState(self):
+        """
+        _convertState
+        Converts the cubestring used in the two phase solver
+        to one that this program can generate an image of
+        """
+        
+        self.cubestring = self.cubestring[:12] + self.cubestring[18:21] + self.cubestring[30:33] + self.cubestring[39:42]
+        newString = ""
+        translations = {"U": "w", "D": "y", "R": "r", "L": "o", "F": "g", "B": "b"}
+        for i, char in enumerate(self.cubestring):
+            c = translations[char]
+            if self.algset in IGNORED_COLORS and c in IGNORED_COLORS[self.algset]:
+                if self.algset in KEEP_INDICES and i in KEEP_INDICES[self.algset]:
+                    newString += c
+                else:
+                    newString += "x"
+            elif self.algset in IGNORED_INDICES and i in IGNORED_INDICES[self.algset]:
+                newString += "x"
+            else:
+                newString += c
+        self.cubestring = newString
