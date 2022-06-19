@@ -31,6 +31,7 @@ class ImageGen:
         self._drawSquares()
         self._drawLines()
         self.img.save(f"{OUTPUT_PATH}{self.fName}.png")
+        self.img.close()
 
     def _drawSquares(self):
         """
