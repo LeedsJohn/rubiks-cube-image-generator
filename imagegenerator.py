@@ -4,6 +4,7 @@ John Leeds
 6/19/2022
 Class used to generate images of a Rubik's cube
 """
+import os
 from PIL import Image, ImageDraw
 
 OUTPUT_PATH = "./output/"
@@ -30,7 +31,9 @@ class ImageGen:
         self._convertState()
         self._drawSquares()
         self._drawLines()
-        self.img.save(f"{OUTPUT_PATH}{self.fName}.png")
+        if not os.path.isdir(f"{OUTPUT_PATH}{self.algset}"):
+            os.mkdir(f"{OUTPUT_PATH}{self.algset}")
+        self.img.save(f"{OUTPUT_PATH}{self.algset}/{self.fName}.png")
         self.img.close()
 
     def _drawSquares(self):
