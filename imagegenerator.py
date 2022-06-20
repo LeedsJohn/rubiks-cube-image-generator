@@ -25,7 +25,7 @@ class ImageGen:
         self.cubestring = cubestring
         self.fName = fName
         self.algset = algset
-        self.img = Image.new('RGB', (81, 81))
+        self.img = Image.new('RGBA', (81, 81), (255, 0, 0, 0))
     
     def make(self):
         self._convertState()
