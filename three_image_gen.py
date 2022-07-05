@@ -1,5 +1,5 @@
 """
-imagegenerator.py
+three_image_gen.py
 John Leeds
 6/19/2022
 Class used to generate images of a Rubik's cube
