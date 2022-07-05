@@ -18,7 +18,7 @@ CHAR_TO_COLOR = {"w": (255, 255, 255),
 
 IGNORED_COLORS = {"OLL": "gwrbo", "WVLS": "gwrbo", "WVLS_FL": "gwrbo"}
 IGNORED_INDICES = {"CMLL": [1, 3, 4, 5, 7, 10, 13, 16, 19], "COLL": [10, 13, 16, 19]}
-KEEP_INDICES = {"WVLS": [5, 8, 10, 11, 12], "WVLS_FL": [5, 8, 10, 11, 12]}
+KEEP_INDICES = {"WVLS": [5, 8, 10, 11, 12], "WVLS_FL": [3, 6, 14, 15, 16]}
 
 class ImageGen:
     def __init__(self, cubestring, fName, algset):
